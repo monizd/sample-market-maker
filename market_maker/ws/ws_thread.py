@@ -170,6 +170,9 @@ class BitMEXWebsocket():
             conn_timeout -= 1
 
         if not conn_timeout or self._error:
+            self.logger.error("Couldn't connect to WS! Sleeping for 30 seconds to avoid rate limit.")
+            sleep(30)
+            
             self.logger.error("Couldn't connect to WS! Exiting.")
             self.exit()
             sys.exit(1)
